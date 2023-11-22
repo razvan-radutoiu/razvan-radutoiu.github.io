@@ -1,39 +1,11 @@
+#  Personal Portfolio
 
-#  terminal-portfolio
+Welcome to my personal portfolio repository! This project showcases my skills, projects, and provides a glimpse into my background. The repository encompasses a unique terminal-like interface, offering an interactive and engaging user experience.
 
-Make a terminal like a Portfolio website, hacker portfolio, or dev portfolio. 
-
-A portfolio is a very important thing for personal branding. It will help you to describe yourself to other people, But an ordinary website can make and use by everyone. so What is The difference between a Geek and common people?
-
-## Demo
-
-Insert gif or link to demo
-
+## Technologies Used
+- **HTML, CSS, JavaScript:** The core technologies used to build the interactive and responsive interface.
+- **WinBox.js:** Employed for the terminal-like windowing system, enhancing the user experience.
   
-## Screenshots
+Feel free to fork this repository and customize it for your personal use. Connect with me on LinkedIn and GitHub for more updates!
 
-![App Screenshot](https://github.com/naemazam/terminal-portfolio/blob/main/img/trm.PNG)
-
-
-## Youtube Tutorial 
-
-https://youtu.be/_hreXt6mqnw 
-
-  
-## Links
-[winbox.js](https://github.com/nextapps-de/winbox)
-
-[icons](https://icons8.com )
-
-[type effect](https://readme-typing-svg.herokuapp.com/demo/)
-  
-## Contributing
-
-Contributions are always welcome!
-
-See `contributing.md` for ways to get started.
-
-Please adhere to this project's `code of conduct`.
-
-  ## License
-MIT
+*Icons sourced from Icons8.*
