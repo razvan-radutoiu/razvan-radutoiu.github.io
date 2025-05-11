@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="competition" content="CyberGame">
+  <meta name="challenge" content="suspect-tracking-golden-hour">
+  <title>Suspect tracking - Golden Hour | CTF Writeups</title>
+  <link rel="stylesheet" href="../../../css/style.css">
+  <link rel="stylesheet" href="../../../css/writeup.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox">
+      <div class="slider round"></div>
+    </label>
+    <em>Light / Dark</em>
+  </div>
+
+  <header class="writeup-header">
+    <div class="writeup-nav">
+      <a href="../../index.html" class="back-link"><i class="fas fa-chevron-left"></i> Back to Writeups</a>
+      <h1 class="writeup-title">Suspect tracking - Golden Hour</h1>
+      <div class="writeup-meta">
+        <span class="writeup-badge osint">OSINT</span>
+        <span class="writeup-date">CyberGame Slovakia 2025</span>
+        <span class="writeup-difficulty">Hard</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="writeup-container">
+    <aside class="writeup-sidebar">
+      <div class="writeup-toc">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#challenge-overview">Challenge Overview</a></li>
+          <li><a href="#initial-analysis">Initial Analysis</a></li>
+          <li><a href="#tools-used">Tools Used</a></li>
+          <li><a href="#solution-process">Solution Process</a></li>
+          <li><a href="#the-flag">The Flag</a></li>
+          <li><a href="#conclusion">Conclusion</a></li>
+          <li><a href="#additional-resources">Additional Resources</a></li>
+        </ul>
+      </div>
+      
+      <div class="writeup-tools">
+        <h3>Tools Used</h3>
+        <ul class="tools-list">
+          <li><i class="fas fa-globe"></i> Google Earth Pro</li>
+          <li><i class="fas fa-sun"></i> SunCalc.org</li>
+          <li><i class="fas fa-compass"></i> Azimuth calculation</li>
+          <li><i class="fas fa-ruler-vertical"></i> Sun angle analysis</li>
+        </ul>
+      </div>
+    </aside>
+
+    <article class="writeup-content">
+      <section id="challenge-overview">
+        <h2>Challenge Overview</h2>
+        <div class="challenge-info">
+          <p><strong>[★★★] Suspect tracking - Golden Hour</strong><br>
+          <strong>Points: 27</strong></p>
+          
+          <blockquote>
+            <p>Good work! We have managed to identify the location with an accuracy down to a few centimeters. We know where the photograph in question was taken and likely also the time it was captured.</p>
+            <p>Can we determine the exact date when the photograph was taken based on the image?
+            The flag should be in the format "MMDD", e.g., if it was taken on February 14th, the flag would be "0214".</p>
+          </blockquote>
+          
+          
+        </div>
+      </section>
+
+      <section id="initial-analysis">
+        <h2>Initial Analysis</h2>
+        <p>This challenge is part of a series of OSINT investigations. In previous challenges, we had already determined the exact location where a photograph was taken. Now we need to determine the exact date using just the image itself.</p>
+        
+        <p>The title "Golden Hour" is a significant clue - in photography, the golden hour refers to the period shortly after sunrise or before sunset where daylight is redder and softer compared to when the sun is higher in the sky.</p>
+        
+        
+      </section>
+
+      <section id="tools-used">
+        <h2>Tools Used</h2>
+        <ul>
+          <li>Google Earth Pro (to verify the location)</li>
+          <li>SunCalc.org (primary tool for determining the date)</li>
+          <li>Sun azimuth and elevation angle estimation from picture</li>
+        </ul>
+      </section>
+
+      <section id="solution-process">
+        <h2>Solution Process</h2>
+        
+        <h3>Step 1: Verifying the Location with Google Earth Pro</h3>
+        <p>First, I verified the exact location using Google Earth Pro. The coordinates (36.0486, 14.1912) placed us in Malta. I lined up the view in Google Earth to match the perspective seen in the photograph.</p>
+
+        <div class="image-container">
+          <video controls class="writeup-image">
+            <source src="vid.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <figcaption>Google Earth Pro location verification showing the exact match with the photograph</figcaption>
+        </div>
+        
+        <h3>Step 2: Determining the Sun's Position</h3>
+        <p>From the photograph, considering the challange name "Golden Hour" and exact coords from previous challange, we could determine sun is pointing somewhere west, between a sea rock and the shoreline.  </p>
+        
+        <h3>Step 3: Using SunCalc.org for Date Determination</h3>
+        <div class="image-container">
+          <img src="suncalc-analysis.jpg" alt="SunCalc.org analysis" class="writeup-image">
+          <figcaption>SunCalc.org analysis at coordinates 36.0486, 14.1912 at 17:14</figcaption>
+        </div>
+        
+        <p>I used SunCalc.org with the exact coordinates (36.0486, 14.1912) and time (17:14) from the photo. The key to solving this challenge was using the precise azimuth (the horizontal angle of the sun's position) and elevation angle (the vertical angle of the sun above the horizon).</p>
+        
+        <p>By examining the photo, I was able to determine approximately where the sun was positioned. In SunCalc, I then adjusted the date while keeping the time constant at 17:14, watching how the sun's position changed. By doing some guesswork and playing with some <a href="https://www.pveducation.org/pvcdrom/properties-of-sunlight/elevation-angle">sun angle formulas</a>, I calculated the sun elevation angle to be roughtly 2°.</p>
+        
+        <h3>Step 4: Matching the Sun's Position</h3>
+        <p>I started by trying various dates in January 2024, since the "golden hour" effect suggested winter in the northern hemisphere. I methodically checked different dates, comparing:</p>
+        <ul>
+          <li>The sun's azimuth (compass direction)</li>
+          <li>The sun's elevation angle above the horizon</li>
+        </ul>
+        
+        <p>On January 30th, I found that the sun's position perfectly matched what we observed in the photograph - both in terms of direction (azimuth) and height above the horizon (elevation angle).</p>
+        
+        <h3>Step 5: Verification</h3>
+        <p>To verify this finding, I checked dates before and after January 30th. The sun's position on nearby dates (January 29th and 31st) was slightly off, confirming that January 30th was indeed the date when the photograph was taken.</p>
+        
+        <p>The specific SunCalc URL that confirmed the date was: <a href="https://www.suncalc.org/#/36.0486,14.1912,18/2024.01.30/17:14/1/3" target="_blank">https://www.suncalc.org/#/36.0486,14.1912,18/2024.01.30/17:14/1/3</a></p>
+      </section>
+
+      <section id="the-flag">
+        <h2>The Flag</h2>
+        <p>Based on the challenge requirements, the flag format is "MMDD" where MM is the month and DD is the day.</p>
+        
+        <p>Since the photograph was taken on January 30th, the flag is:</p>
+        
+        <div class="flag-container">
+          <code>0130</code>
+        </div>
+      </section>
+
+      <section id="conclusion">
+        <h2>Conclusion</h2>
+        <p>This challenge demonstrates a powerful OSINT technique called "chronolocation" - determining when a photo was taken based on the position of the sun. It's a technique used by intelligence agencies, journalists, and investigators to verify the authenticity of images and determine precisely when events occurred.</p>
+        
+        <p>The key learning points from this challenge:</p>
+        <ol>
+          <li>The sun's position in the sky is different every day of the year</li>
+          <li>Tools like SunCalc.org can help determine the exact date a photo was taken if you know the location and time</li>
+          <li>Azimuth (compass direction) and elevation angle are crucial parameters for determining the date</li>
+          <li>The "Golden Hour" is a critical time for this analysis as the sun's position is more distinctive</li>
+        </ol>
+        
+        <p>This technique works best when:</p>
+        <ul>
+          <li>The exact location is known</li>
+          <li>The approximate time of day is known</li>
+          <li>The photo shows clear indications of the sun's position (through lighting or shadows)</li>
+          <li>The photo was taken on a clear day without significant cloud cover</li>
+        </ul>
+      </section>
+
+      <section id="additional-resources" class="resources">
+        <h2>Additional Resources</h2>
+        <p>If you want to learn more about this technique, check out:</p>
+        <ul>
+          <li><a href="https://www.suncalc.org/" target="_blank">SunCalc.org</a> - A free tool for analyzing sun positions</li>
+          <li><a href="https://www.bellingcat.com/resources/how-tos/2020/12/03/using-the-sun-and-the-shadows-for-geolocation/" target="_blank">Bellingcat's guide to chronolocation</a></li>
+          <li><a href="https://forensic-architecture.org/methodology/chronolocation" target="_blank">Forensic Architecture's methodology on chronolocation</a></li>
+          <li><a href="https://photoephemeris.com/" target="_blank">The Photographer's Ephemeris</a> - Another tool for planning photography based on sun position</li>
+        </ul>
+      </section>
+    </article>
+  </main>
+
+  <footer class="writeup-footer">
+    <div class="footer-content">
+      <div class="footer-nav">
+        <a href="#" class="prev-writeup disabled">
+          <i class="fas fa-arrow-left"></i>
+          <span>Previous Writeup</span>
+        </a>
+        
+        <a href="../../index.html" class="all-writeups">
+          <i class="fas fa-th-large"></i>
+          <span>All Writeups</span>
+        </a>
+        
+        <a href="#" class="next-writeup disabled">
+          <i class="fas fa-arrow-right"></i>
+          <span>Next Writeup</span>
+        </a>
+      </div>
+      
+      <p>&copy; 2025 Razvan Radutoiu. All rights reserved.</p>
+      
+    </div>
+  </footer>
+
+  <script src="../../../js/writeup.js"></script>
+</body>
+</html>

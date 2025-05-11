@@ -664,6 +664,11 @@ nav ul li:hover {
   color: #fff;
 }
 
+.ctf-badge.osint {
+  background-color: #db2778;
+  color: #fff;
+}
+
 .ctf-date {
   font-size: 0.75rem;
   color: #aaa;
