@@ -72,11 +72,11 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Add to writeup.js
+// Setup writeup navigation
 document.addEventListener('DOMContentLoaded', function() {
   // Get current writeup info from meta tags
-  const competition = document.querySelector('meta[name="competition"]').getAttribute('content');
-  const challenge = document.querySelector('meta[name="challenge"]').getAttribute('content');
+  const competition = document.querySelector('meta[name="competition"]')?.getAttribute('content');
+  const challenge = document.querySelector('meta[name="challenge"]')?.getAttribute('content');
   
   // Generate navigation URLs
   const generateWriteupUrl = (comp, chall) => {
@@ -89,17 +89,122 @@ document.addEventListener('DOMContentLoaded', function() {
   const prevLink = document.querySelector('.prev-writeup');
   const nextLink = document.querySelector('.next-writeup');
   
-  if (prevWriteup) {
+  let metaNavSuccess = false;
+  
+  if (prevLink && prevWriteup) {
     const [prevComp, prevChall] = prevWriteup.getAttribute('content').split('/');
     prevLink.href = generateWriteupUrl(prevComp, prevChall);
-  } else {
+    prevLink.classList.remove('disabled');
+    metaNavSuccess = true;
+  } else if (prevLink) {
     prevLink.classList.add('disabled');
   }
   
-  if (nextWriteup) {
+  if (nextLink && nextWriteup) {
     const [nextComp, nextChall] = nextWriteup.getAttribute('content').split('/');
     nextLink.href = generateWriteupUrl(nextComp, nextChall);
-  } else {
+    nextLink.classList.remove('disabled');
+    metaNavSuccess = true;
+  } else if (nextLink) {
     nextLink.classList.add('disabled');
+  }
+  
+  // If meta navigation failed or is incomplete, try dynamic navigation
+  if (!metaNavSuccess) {
+    fetchDynamicNavigation();
+  }
+  
+  // Dynamic navigation function
+  async function fetchDynamicNavigation() {
+    try {
+      // Extract current writeup path information
+      const pathSegments = window.location.pathname.split('/');
+      const currentCompetition = pathSegments[pathSegments.length - 3] || '';
+      const currentChallenge = pathSegments[pathSegments.length - 2] || '';
+      
+      if (!currentCompetition || !currentChallenge) return;
+      
+      // Fetch the writeups index page
+      const indexPath = '../../index.html';
+      const response = await fetch(indexPath);
+      const html = await response.text();
+      
+      // Parse the HTML to extract writeup data
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      
+      // Extract all writeup cards
+      const writeupCards = Array.from(doc.querySelectorAll('.writeup-card'));
+      
+      // Build writeup data array
+      const writeups = writeupCards.map(card => {
+        const title = card.querySelector('h3').textContent;
+        const link = card.querySelector('.read-writeup-btn').getAttribute('href');
+        const competition = card.querySelector('.writeup-competition').textContent;
+        const date = card.dataset.date || '';
+        
+        // Extract competition and challenge from link
+        const linkParts = link.split('/');
+        const comp = linkParts[0] || '';
+        const chall = linkParts[1] || '';
+        
+        return {
+          title,
+          link,
+          competition,
+          date,
+          comp,
+          chall
+        };
+      });
+      
+      // Sort by date (newest first)
+      writeups.sort((a, b) => {
+        if (!a.date || !b.date) return 0;
+        return new Date(b.date) - new Date(a.date);
+      });
+      
+      // Find current writeup index
+      const currentIndex = writeups.findIndex(writeup => 
+        writeup.comp === currentCompetition && writeup.chall === currentChallenge
+      );
+      
+      if (currentIndex === -1) return;
+      
+      // Get previous and next writeups
+      const prevWriteup = currentIndex < writeups.length - 1 ? writeups[currentIndex + 1] : null;
+      const nextWriteup = currentIndex > 0 ? writeups[currentIndex - 1] : null;
+      
+      // Update navigation links if they were disabled
+      if (prevLink && prevLink.classList.contains('disabled') && prevWriteup) {
+        prevLink.href = prevWriteup.link;
+        
+        // Find or create span for the title
+        let prevSpan = prevLink.querySelector('span');
+        if (!prevSpan) {
+          prevSpan = document.createElement('span');
+          prevLink.appendChild(prevSpan);
+        }
+        prevSpan.textContent = 'Previous: ' + prevWriteup.title;
+        prevLink.classList.remove('disabled');
+      }
+      
+      if (nextLink && nextLink.classList.contains('disabled') && nextWriteup) {
+        nextLink.href = nextWriteup.link;
+        
+        // Find or create span for the title
+        let nextSpan = nextLink.querySelector('span');
+        if (!nextSpan) {
+          nextSpan = document.createElement('span');
+          nextLink.appendChild(nextSpan);
+        }
+        nextSpan.textContent = 'Next: ' + nextWriteup.title;
+        nextLink.classList.remove('disabled');
+      }
+      
+      console.log('Dynamic navigation loaded successfully');
+    } catch (error) {
+      console.error('Error fetching dynamic navigation:', error);
+    }
   }
 });

@@ -26,14 +26,16 @@ if (savedTheme === 'light') {
 
 // Create WinBox for About Section
 about.addEventListener('click', () => {
+  // Get the button's position
+  const buttonRect = about.getBoundingClientRect();
+  
+  // Create the WinBox starting from the button's position
   const aboutBox = new WinBox({
     title: 'About Me',
-    width: '600px',
-    height: '500px',
-    top: 50,
-    right: 50,
-    bottom: 50,
-    left: 50,
+    width: '1px', // Start small
+    height: '1px',
+    x: buttonRect.left,
+    y: buttonRect.top,
     mount: aboutContent,
     onfocus: function () {
       this.setBackground('#00aa00');
@@ -43,18 +45,34 @@ about.addEventListener('click', () => {
     },
     class: document.body.classList.contains('light-theme') ? 'light-theme' : '',
   });
+  
+  // Animate to final position and size
+  setTimeout(() => {
+    // Add a transition for smooth animation
+    aboutBox.g.style.transition = 'all 0.4s cubic-bezier(0.17, 0.84, 0.44, 1)';
+    
+    // Calculate a good width - about 40% of the screen width
+    const finalWidth = Math.min(600, window.innerWidth * 0.4) + 'px';
+    // Use a height that fits most of the viewport
+    const finalHeight = Math.min(800, window.innerHeight * 0.85) + 'px';
+    
+    // Move to the left side of the screen and resize
+    aboutBox.move(20, 50).resize(finalWidth, finalHeight);
+  }, 50);
 });
 
 // Create WinBox for Contact Section
 contact.addEventListener('click', () => {
+  // Get the button's position
+  const buttonRect = contact.getBoundingClientRect();
+  
+  // Create the WinBox starting from the button's position
   const contactBox = new WinBox({
     title: 'Contact Me',
-    width: '600px',
-    height: '500px',
-    top: 50,
-    right: 50,
-    bottom: 50,
-    left: 60,
+    width: '1px',
+    height: '1px',
+    x: buttonRect.left,
+    y: buttonRect.top,
     mount: contactContent,
     onfocus: function () {
       this.setBackground('#00aa00');
@@ -64,18 +82,35 @@ contact.addEventListener('click', () => {
     },
     class: document.body.classList.contains('light-theme') ? 'light-theme' : '',
   });
+  
+  // Animate to final position and size on the lower right side
+  setTimeout(() => {
+    contactBox.g.style.transition = 'all 0.4s cubic-bezier(0.17, 0.84, 0.44, 1)';
+    
+    // Calculate final width and right position
+    const finalWidth = Math.min(450, window.innerWidth * 0.4);
+    const finalHeight = Math.min(491.05, window.innerHeight * 0.49);
+    // Position on the right side
+    const rightPosition = window.innerWidth - finalWidth - 20;
+    // Position towards the bottom
+    const lowerPosition = window.innerHeight - finalHeight - 50;
+    
+    contactBox.move(rightPosition, lowerPosition).resize(finalWidth + 'px', finalHeight + 'px');
+  }, 50);
 });
 
 // Create WinBox for Projects Section
 project.addEventListener('click', () => {
+  // Get the button's position
+  const buttonRect = project.getBoundingClientRect();
+  
+  // Create the WinBox starting from the button's position
   const projectBox = new WinBox({
     title: 'My Projects',
-    width: '800px',
-    height: '600px',
-    top: 50,
-    right: 50,
-    bottom: 50,
-    left: 50,
+    width: '1px',
+    height: '1px',
+    x: buttonRect.left,
+    y: buttonRect.top,
     mount: projectContent,
     onfocus: function () {
       this.setBackground('#00aa00');
@@ -85,18 +120,32 @@ project.addEventListener('click', () => {
     },
     class: document.body.classList.contains('light-theme') ? 'light-theme' : '',
   });
+  
+  // Animate to final position and size on the right side
+  setTimeout(() => {
+    projectBox.g.style.transition = 'all 0.4s cubic-bezier(0.17, 0.84, 0.44, 1)';
+    
+    // Calculate final width and right position
+    const finalWidth = Math.min(800, window.innerWidth * 0.45);
+    // Position on the right side
+    const rightPosition = window.innerWidth - finalWidth - 20;
+    
+    projectBox.move(rightPosition, 50).resize(finalWidth + 'px', '600px');
+  }, 50);
 });
 
 // Create WinBox for CTF Achievements Section
 ctf.addEventListener('click', () => {
+  // Get the button's position
+  const buttonRect = ctf.getBoundingClientRect();
+  
+  // Create the WinBox starting from the button's position
   const ctfBox = new WinBox({
     title: 'CTF Achievements',
-    width: '800px',
-    height: '600px',
-    top: 50,
-    right: 50,
-    bottom: 50,
-    left: 50,
+    width: '1px',
+    height: '1px',
+    x: buttonRect.left,
+    y: buttonRect.top,
     mount: ctfContent,
     onfocus: function () {
       this.setBackground('#00aa00');
@@ -106,6 +155,23 @@ ctf.addEventListener('click', () => {
     },
     class: document.body.classList.contains('light-theme') ? 'light-theme' : '',
   });
+  
+  // Animate to final position and size on the lower left side
+  setTimeout(() => {
+    ctfBox.g.style.transition = 'all 0.4s cubic-bezier(0.17, 0.84, 0.44, 1)';
+    
+    // Calculate final width and height
+    const finalWidth = Math.min(800, window.innerWidth * 0.45);
+    const finalHeight = Math.min(600, window.innerHeight * 0.7);
+    
+    // Position on the left side
+    const leftPosition = 20; // 20px from the left edge
+    
+    // Position towards the bottom
+    const lowerPosition = window.innerHeight - finalHeight - 50;
+    
+    ctfBox.move(leftPosition, lowerPosition).resize(finalWidth + 'px', finalHeight + 'px');
+  }, 50);
 });
 
 // Typing Effect
@@ -268,3 +334,141 @@ if (terminalWindow) {
     });
   });
 }
+
+//calculate and update CTF statistics from competition data
+function updateCTFStats() {
+  const competitionCards = document.querySelectorAll('.ctf-competition-card');
+  
+  let totalCompetitions = competitionCards.length;
+  let totalPoints = 0;
+  let challengeCount = 1337; // placeholder for now
+  
+  competitionCards.forEach(card => {
+    const scoreText = card.querySelector('.ctf-score')?.textContent || '';
+    const scoreMatch = scoreText.match(/Score: ([\d,]+) pts/);
+    
+    if (scoreMatch && scoreMatch[1]) {
+      const points = parseInt(scoreMatch[1].replace(/,/g, ''), 10);
+      if (!isNaN(points)) {
+        totalPoints += points;
+      }
+    }
+  });
+  
+  const statsCards = document.querySelectorAll('.ctf-stat-card .ctf-stat-value');
+  if (statsCards.length >= 3) {
+    statsCards[0].textContent = totalCompetitions;
+
+    statsCards[2].textContent = totalPoints.toLocaleString();
+  }
+}
+
+
+document.getElementById('ctf').addEventListener('click', function() {
+  setTimeout(updateCTFStats, 300);
+});
+
+document.addEventListener('click', function(event) {
+  if (event.target.classList.contains('ctf-tab')) {
+    if (event.target.getAttribute('data-tab') === 'competitions') {
+      setTimeout(updateCTFStats, 100);
+    }
+  }
+});
+
+
+// Function to update CTF statistics based on competition data
+function updateCTFStats() {
+  // Select all competition cards
+  const competitionCards = document.querySelectorAll('.ctf-competition-card');
+  
+  // Initialize counters
+  let totalCompetitions = competitionCards.length;
+  let totalPoints = 0;
+  let totalPercentileSum = 0;
+  let competitionsWithPositions = 0;
+  
+  // Process each competition card
+  competitionCards.forEach(card => {
+    // Extract score from the card
+    const scoreText = card.querySelector('.ctf-score')?.textContent || '';
+    const scoreMatch = scoreText.match(/Score: ([\d,]+) pts/);
+    
+    if (scoreMatch && scoreMatch[1]) {
+      // Convert string like "1,564" to number 1564
+      const points = parseInt(scoreMatch[1].replace(/,/g, ''), 10);
+      if (!isNaN(points)) {
+        totalPoints += points;
+      }
+    }
+    
+    // Extract position for percentile calculation
+    const positionText = card.querySelector('.ctf-position')?.textContent || '';
+    const positionMatch = positionText.match(/Position: (\d+)\/(\d+)/);
+    
+    if (positionMatch && positionMatch[1] && positionMatch[2]) {
+      const position = parseInt(positionMatch[1], 10);
+      const totalTeams = parseInt(positionMatch[2], 10);
+      
+      if (!isNaN(position) && !isNaN(totalTeams)) {
+        // Calculate percentile (how many teams you outperformed)
+        const percentile = (1 - (position / totalTeams)) * 100;
+        totalPercentileSum += percentile;
+        competitionsWithPositions++;
+      }
+    }
+  });
+  
+  // Calculate average percentile if we have data
+  let percentileDisplay = "TOP TIER";
+  if (competitionsWithPositions > 0) {
+    const averagePercentile = totalPercentileSum / competitionsWithPositions;
+    percentileDisplay = ` ${Math.round(averagePercentile)}%`;
+  }
+  
+  // Update the statistics dashboard
+  const statsCards = document.querySelectorAll('.ctf-stat-card');
+  if (statsCards.length >= 4) {
+    // Update competitions count
+    statsCards[0].querySelector('.ctf-stat-value').textContent = totalCompetitions;
+    
+    // Update total points with thousands separator
+    statsCards[2].querySelector('.ctf-stat-value').textContent = 
+      totalPoints.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    
+    // Update the 4th stat card (replacing "TOP 5% Global Ranking")
+    statsCards[3].querySelector('.ctf-stat-value').textContent = percentileDisplay;
+    statsCards[3].querySelector('.ctf-stat-label').textContent = "Top Percentile";
+  }
+}
+
+// Update statistics when the CTF tab is clicked
+document.addEventListener('DOMContentLoaded', function() {
+  const ctfButton = document.getElementById('ctf');
+  if (ctfButton) {
+    ctfButton.addEventListener('click', function() {
+      // Wait a brief moment for the WinBox to be created and populated
+      setTimeout(updateCTFStats, 300);
+    });
+  }
+  
+  // Also handle tab navigation within the CTF section
+  document.addEventListener('click', function(event) {
+    // Check if a CTF tab was clicked
+    if (event.target.classList.contains('ctf-tab')) {
+      // If competitions tab was clicked
+      if (event.target.getAttribute('data-tab') === 'competitions') {
+        // Wait a brief moment for the tab content to be displayed
+        setTimeout(updateCTFStats, 100);
+      }
+    }
+  });
+
+  // Also update stats in case someone is viewing the CTF section directly
+  setTimeout(function() {
+    const competitionsContent = document.getElementById('competitions-content');
+    if (competitionsContent && competitionsContent.classList.contains('active')) {
+      updateCTFStats();
+    }
+  }, 500);
+});

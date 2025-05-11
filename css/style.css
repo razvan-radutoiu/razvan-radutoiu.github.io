@@ -1200,3 +1200,8 @@ nav ul li:hover {
     grid-template-columns: 1fr;
   }
 }
+
+/* Add this to your style.css */
+.winbox {
+  will-change: transform, width, height;
+}

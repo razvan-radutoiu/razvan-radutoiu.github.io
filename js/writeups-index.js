@@ -187,3 +187,100 @@ sortSelect.addEventListener('change', sortWriteups);
 // Initial sort and filter application
 sortWriteups();
 applyFilters();
+
+
+// Add this function to calculate and update stats
+function updateWriteupStats() {
+  // Get all writeup cards
+  const allWriteups = document.querySelectorAll('.writeup-card');
+  
+  // Count total writeups
+  const totalWriteups = allWriteups.length;
+  
+  // Count unique categories
+  const categories = new Set();
+  allWriteups.forEach(writeup => {
+    categories.add(writeup.dataset.category);
+  });
+  
+  // Count unique competitions
+  const competitions = new Set();
+  allWriteups.forEach(writeup => {
+    const competitionEl = writeup.querySelector('.writeup-competition');
+    if (competitionEl) {
+      competitions.add(competitionEl.textContent.trim());
+    }
+  });
+  
+  // Update the stats in the sidebar
+  const statItems = document.querySelectorAll('.stat-item .stat-value');
+  if (statItems.length >= 3) {
+    statItems[0].textContent = totalWriteups;
+    statItems[1].textContent = categories.size;
+    statItems[2].textContent = competitions.size;
+    // We'll keep the views count as is, as this would typically require a backend
+  }
+}
+
+// Call this function when the page loads
+document.addEventListener('DOMContentLoaded', updateWriteupStats);
+
+
+// Add to writeups-index.js - for implementing dynamic view counting
+
+// Function to update the total views statistic
+async function updateTotalViews() {
+  try {
+    // Create a unique namespace for your site
+    const namespace = 'radutoiu-ctf-writeups';
+    
+    // Fetch the total view count from CountAPI
+    const response = await fetch(`https://api.countapi.xyz/get/${namespace}/total-views`);
+    const data = await response.json();
+    
+    // If the key doesn't exist yet, create it
+    if (data.value === undefined) {
+      await fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=total-views&value=0`);
+      return 0;
+    }
+    
+    // Update the views count in the stats
+    const viewsElement = document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-value');
+    if (viewsElement) {
+      viewsElement.textContent = data.value.toLocaleString();
+    }
+    
+    return data.value;
+  } catch (error) {
+    console.error('Error updating view count:', error);
+    return 0;
+  }
+}
+
+// Increment total views counter when the page loads
+async function incrementTotalViews() {
+  try {
+    const namespace = 'radutoiu-ctf-writeups';
+    
+    // Increment the counter by 1
+    const response = await fetch(`https://api.countapi.xyz/hit/${namespace}/total-views`);
+    const data = await response.json();
+    
+    // Update the views display
+    const viewsElement = document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-value');
+    if (viewsElement) {
+      viewsElement.textContent = data.value.toLocaleString();
+    }
+  } catch (error) {
+    console.error('Error incrementing view count:', error);
+  }
+}
+
+// Call these functions on page load
+document.addEventListener('DOMContentLoaded', async function() {
+  // Update existing stats first
+  updateWriteupStats();
+  
+  // Then handle the view counting
+  incrementTotalViews();
+});
