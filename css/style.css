@@ -1014,6 +1014,18 @@ nav ul li:hover {
   border: 1px solid rgba(245, 158, 11, 0.2);
 }
 
+.ctf-category-badge.OSINT {
+  background-color: rgba(159, 39, 15, 0.1);
+  color: #f59e7b;
+  border: 1px solid rgba(159, 39, 11, 0.2);
+}
+
+.ctf-category-badge.steganography {
+  background-color: rgba(180, 133, 11, 0.1);
+  color: #f59e7b;
+  border: 1px solid rgba(180, 133, 11, 0.2);
+}
+
 /* Team Section */
 .team-container {
   display: flex;
