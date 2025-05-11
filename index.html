@@ -6,19 +6,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="css/style.css" />
-  <title>terminal@radutoiu_razvan</title>
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-  <a href="https://www.linkedin.com/in/razvan-radutoiu-561822241/" target="_blank"><img src="img/li.png" width="50"
-      height="50" /></a>
-  <a href="#" target="_blank"><img src="https://img.icons8.com/color/50/000000/console.png" /></a>
-  <a href="img/resume.pdf" target="_blank"><img src="img/pdf.png" /></a>
-
-
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>terminal@radutoiu_razvan</title>
 </head>
-<!--  edit contain 1 -->
 
 <body>
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <div class="slider round"></div>
+    </label>
+    <em>Light / Dark</em>
+  </div>
 
   <div class="container">
     <nav>
@@ -26,100 +26,479 @@
         <li id="about">/about</li>
         <li id="contact">/contact</li>
         <li id="project">/projects</li>
-
+        <li id="ctf">/ctf_achievements</li>
       </ul>
     </nav>
 
     <main>
+      <div class="social-icons">
+        <a href="https://www.linkedin.com/in/razvan-radutoiu-561822241/" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/razvan-radutoiu" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="img/resume.pdf" target="_blank">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+      </div>
 
       <h1>radutoiu_razvan:$<span class="cursor">|</span></h1>
-      <h3>My Skills:</h3>
-      <div class="process">
-        <div class="box">
-          <img
-            src="https://readme-typing-svg.herokuapp.com?color=F76A22&lines=html+%23%23%23%23%23%23%23%23%23%23+90%25"></img>
-          <img src="https://readme-typing-svg.herokuapp.com?color=EFF727&lines=js+%23%23%23%23%23%23%23%23+70%25"></img>
-          <img
-            src="https://readme-typing-svg.herokuapp.com?color=1F25F7&lines=python+%23%23%23%23%23%23%23%23+100%25"></img>
-          <img
-            src="https://readme-typing-svg.herokuapp.com?color=0EE6F7&lines=bash+%23%23%23%23%23%23%23%23%23+100%25"></img>
-          <img
-            src="https://readme-typing-svg.herokuapp.com?color=F76A26&lines=linux+%23%23%23%23%23%23%23%23%23%23+100%25"></img>
-          <img
-            src="https://readme-typing-svg.herokuapp.com?color=F70CEAFF&lines=java+%23%23%23%23%23%23%23%23%23%23+70%25"></img>
-
+      <p class="intro-text">Telecommunications student & cybersecurity enthusiast</p>
+      
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-buttons">
+            <span class="terminal-close"></span>
+            <span class="terminal-minimize"></span>
+            <span class="terminal-maximize"></span>
+          </div>
+          <div class="terminal-title">bash ~ root</div>
         </div>
+        <div class="terminal-content">
+          <p>$ whoami</p>
+          <p>razvan_radutoiu</p>
+          <p>$ cat skills.txt</p>
+          <div class="skills-container">
+            <div class="skill">
+              <span class="skill-name">HTML/CSS</span>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 90%;"></div>
+              </div>
+              <span class="skill-percent">90%</span>
+            </div>
+            <div class="skill">
+              <span class="skill-name">JavaScript</span>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 70%;"></div>
+              </div>
+              <span class="skill-percent">70%</span>
+            </div>
+            <div class="skill">
+              <span class="skill-name">Python</span>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 100%;"></div>
+              </div>
+              <span class="skill-percent">100%</span>
+            </div>
+            <div class="skill">
+              <span class="skill-name">Bash</span>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 100%;"></div>
+              </div>
+              <span class="skill-percent">100%</span>
+            </div>
+            <div class="skill">
+              <span class="skill-name">Linux</span>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 100%;"></div>
+              </div>
+              <span class="skill-percent">100%</span>
+            </div>
+            <div class="skill">
+              <span class="skill-name">Java</span>
+              <div class="skill-bar">
+                <div class="skill-level" style="width: 70%;"></div>
+              </div>
+              <span class="skill-percent">70%</span>
+            </div>
+          </div>
+          <p>$ <span class="typing-effect">_</span></p>
+        </div>
+      </div>
     </main>
   </div>
 
-  <!--  edit contain 1 -->
   <div class="hidden">
     <div id="about-content">
       <h2>about-me:$<span class="cursor">|</span></h2>
-      <p>Hi, I'm <a href="https://github.com/razvan-radutoiu" target="_blank">Razvan Radutoiu</a>, a third-year telecommunications student based in Braşov, Romania. My passion for computer science and telecommunications extends across various domains, with a particular focus on cybersecurity, networking, and data science.
-      </p>
-
+      <div class="about-grid">
+        <div class="about-text">
+          <p>Hi, I'm <a href="https://github.com/razvan-radutoiu" target="_blank">Razvan Radutoiu</a>, a third-year telecommunications student based in Braşov, Romania. My passion for computer science and telecommunications extends across various domains, with a particular focus on cybersecurity, networking, and data science.</p>
+          <p>I specialize in:</p>
+          <ul class="about-list">
+            <li><i class="fas fa-shield-alt"></i> Network Security</li>
+            <li><i class="fas fa-bug"></i> Vulnerability Assessment</li>
+            <li><i class="fas fa-code"></i> Python Development</li>
+            <li><i class="fas fa-network-wired"></i> IoT Security</li>
+          </ul>
+        </div>
+        <div class="about-image">
+          <img src="img/profile.jpg" alt="Razvan Radutoiu" class="profile-image">
+        </div>
+      </div>
 
       <h3>Find me online:</h3>
-      <ul>
-
-
-
-        <a href="https://www.linkedin.com/in/razvan-florin-radutoiu-561822241/" target="_blank"><img
-            src="https://img.icons8.com/nolan/64/linkedin.png" /></a>
-
-
-        <a href="https://github.com/razvan-radutoiu" target="_blank"><img
-            src="https://img.icons8.com/nolan/64/github.png" /></a>
-
-
-      </ul>
-
+      <div class="social-links">
+        <a href="https://www.linkedin.com/in/razvan-florin-radutoiu-561822241/" target="_blank">
+          <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a href="https://github.com/razvan-radutoiu" target="_blank">
+          <i class="fab fa-github"></i> GitHub
+        </a>
+      </div>
     </div>
 
     <div id="project-content">
       <h2>my_projects:$<span class="cursor">|</span></h2>
-      <h3>My Projects</h3>
-      <ul>
-        <li>
-          <a href="https://github.com/razvan-radutoiu/pi-qr-detector" target="_blank">Malicious QR code detector</a>
-        </li>
-        <li>
-          <a href="https://github.com/razvan-radutoiu/minimalist-music-player" target="_blank">Minimalist music
-            player</a>
-        </li>
-        <li>
-          <a href="https://github.com/razvan-radutoiu/razvan-radutoiu.github.io" target="_blank">This webpage</a>
-        </li>
-        <li>
-          <a href="" target="_blank">ESP32 traffic sniffer</a>
-        </li>
-        <li>
-          <a href="" target="_blank">AI based intrusion dectection system with ESP32 (wip)</a>
-        </li>
+      <div class="projects-grid">
+        <div class="project-card">
+          <div class="project-image">
+            <img src="img/project-qr.jpg" alt="QR code detector">
+          </div>
+          <div class="project-info">
+            <h3>Malicious QR code detector</h3>
+            <p>A Raspberry Pi-based system that detects and analyzes potentially harmful QR codes before scanning.</p>
+            <div class="project-tags">
+              <span>Python</span>
+              <span>Computer Vision</span>
+              <span>Security</span>
+            </div>
+            <a href="https://github.com/razvan-radutoiu/pi-qr-detector" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> View Project
+            </a>
+          </div>
+        </div>
 
-      </ul>
+        <div class="project-card">
+          <div class="project-image">
+            <img src="img/project-music.jpg" alt="Music player">
+          </div>
+          <div class="project-info">
+            <h3>Minimalist music player</h3>
+            <p>A clean, lightweight music player with focus on simplicity and performance.</p>
+            <div class="project-tags">
+              <span>JavaScript</span>
+              <span>HTML/CSS</span>
+              <span>Audio API</span>
+            </div>
+            <a href="https://github.com/razvan-radutoiu/minimalist-music-player" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> View Project
+            </a>
+          </div>
+        </div>
 
-      <p> Smaller Projects </p>
+        <div class="project-card">
+          <div class="project-image">
+            <img src="img/project-esp32.jpg" alt="ESP32 project">
+          </div>
+          <div class="project-info">
+            <h3>ESP32 traffic sniffer</h3>
+            <p>A portable network traffic analyzer built on ESP32 for security research.</p>
+            <div class="project-tags">
+              <span>C++</span>
+              <span>ESP32</span>
+              <span>Networking</span>
+            </div>
+            <a href="#" target="_blank" class="project-link">
+              <i class="fab fa-github"></i> View Project
+            </a>
+          </div>
+        </div>
 
-      wip
+        <div class="project-card">
+          <div class="project-image">
+            <img src="img/project-ai.jpg" alt="AI project">
+          </div>
+          <div class="project-info">
+            <h3>AI-based intrusion detection system</h3>
+            <p>An ESP32 system using machine learning to detect network intrusions (work in progress).</p>
+            <div class="project-tags">
+              <span>Python</span>
+              <span>TensorFlow</span>
+              <span>ESP32</span>
+            </div>
+            <a href="#" target="_blank" class="project-link">
+              <i class="fas fa-clock"></i> Coming Soon
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div id="contact-content">
       <h2>contact-me:$<span class="cursor">|</span></h2>
-      <p>You can contact me at the email and phone number below</p>
-      <ul>
-        <li>Phone: +40 xxx xxx xxx</li>
-        <li>Email: razvan.radutoiu@student.unitbv.ro</li>
-      </ul>
+      <div class="contact-container">
+        <div class="contact-info">
+          <p>You can reach me through:</p>
+          <ul class="contact-list">
+            <li><i class="fas fa-phone"></i> Phone: +40 xxx xxx xxx</li>
+            <li><i class="fas fa-envelope"></i> Email: razvan.radutoiu@student.unitbv.ro</li>
+          </ul>
+        </div>
+        <div class="contact-form">
+          <form>
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" placeholder="Your name">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Your email">
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" placeholder="Your message"></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
     </div>
 
-
+    <div id="ctf-content">
+      <h2>ctf_achievements:$<span class="cursor">|</span></h2>
+      
+      <!-- CTF Statistics Dashboard -->
+      <div class="ctf-stats-dashboard">
+        <div class="ctf-stat-card">
+          <div class="ctf-stat-value">12</div>
+          <div class="ctf-stat-label">CTFs Participated</div>
+        </div>
+        <div class="ctf-stat-card">
+          <div class="ctf-stat-value">68</div>
+          <div class="ctf-stat-label">Challenges Solved</div>
+        </div>
+        <div class="ctf-stat-card">
+          <div class="ctf-stat-value">8,420</div>
+          <div class="ctf-stat-label">Total Points</div>
+        </div>
+        <div class="ctf-stat-card">
+          <div class="ctf-stat-value">TOP 5%</div>
+          <div class="ctf-stat-label">Global Ranking</div>
+        </div>
+      </div>
+      
+      <div class="ctf-sections">
+        <div class="ctf-section-tabs">
+          <button class="ctf-tab active" data-tab="competitions">Competitions</button>
+          <button class="ctf-tab" data-tab="writeups">Writeups</button>
+          <button class="ctf-tab" data-tab="team">My Team</button>
+        </div>
+        
+        <!-- Competitions Tab -->
+        <div class="ctf-tab-content active" id="competitions-content">
+          <div class="ctf-competitions">
+            <div class="ctf-competition-card">
+              <div class="ctf-competition-logo">
+                <img src="img/ctf-htb.png" alt="HackTheBox CTF">
+              </div>
+              <div class="ctf-competition-details">
+                <h3>HackTheBox Cyber Apocalypse 2025</h3>
+                <div class="ctf-competition-info">
+                  <span class="ctf-date">March 2025</span>
+                  <span class="ctf-position">Position: 127/2450</span>
+                  <span class="ctf-score">Score: 4,250 pts</span>
+                </div>
+                <div class="ctf-categories">
+                  <span class="ctf-category-badge web">Web</span>
+                  <span class="ctf-category-badge crypto">Crypto</span>
+                  <span class="ctf-category-badge binary">Binary</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="ctf-competition-card">
+              <div class="ctf-competition-logo">
+                <img src="img/ctf-pico.png" alt="PicoCTF">
+              </div>
+              <div class="ctf-competition-details">
+                <h3>PicoCTF 2025</h3>
+                <div class="ctf-competition-info">
+                  <span class="ctf-date">February 2025</span>
+                  <span class="ctf-position">Position: 85/1872</span>
+                  <span class="ctf-score">Score: 3,450 pts</span>
+                </div>
+                <div class="ctf-categories">
+                  <span class="ctf-category-badge web">Web</span>
+                  <span class="ctf-category-badge forensics">Forensics</span>
+                  <span class="ctf-category-badge reversing">Reversing</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="ctf-competition-card">
+              <div class="ctf-competition-logo">
+                <img src="img/ctf-defcon.png" alt="DEF CON CTF">
+              </div>
+              <div class="ctf-competition-details">
+                <h3>DEF CON CTF Qualifier</h3>
+                <div class="ctf-competition-info">
+                  <span class="ctf-date">January 2025</span>
+                  <span class="ctf-position">Position: 154/986</span>
+                  <span class="ctf-score">Score: 1,850 pts</span>
+                </div>
+                <div class="ctf-categories">
+                  <span class="ctf-category-badge crypto">Crypto</span>
+                  <span class="ctf-category-badge pwn">Pwn</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="ctf-competition-card">
+              <div class="ctf-competition-logo">
+                <img src="img/ctf-csaw.png" alt="CSAW CTF">
+              </div>
+              <div class="ctf-competition-details">
+                <h3>CSAW CTF Qualification Round</h3>
+                <div class="ctf-competition-info">
+                  <span class="ctf-date">December 2024</span>
+                  <span class="ctf-position">Position: 74/1250</span>
+                  <span class="ctf-score">Score: 3,100 pts</span>
+                </div>
+                <div class="ctf-categories">
+                  <span class="ctf-category-badge web">Web</span>
+                  <span class="ctf-category-badge pwn">Pwn</span>
+                  <span class="ctf-category-badge forensics">Forensics</span>
+                  <span class="ctf-category-badge reversing">Reversing</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Writeups Tab -->
+        <div class="ctf-tab-content" id="writeups-content">
+          <div class="writeups-header">
+            <h3>Challenge Writeups</h3>
+            <a href="writeups/index.html" class="view-all-writeups">View All Writeups <i class="fas fa-external-link-alt"></i></a>
+          </div>
+          
+          <div class="ctf-grid">
+  <div class="ctf-card" data-category="web">
+    <div class="ctf-header">
+      <span class="ctf-badge web">Web Exploitation</span>
+      <span class="ctf-date">HackTheBox CA 2025</span>
+    </div>
+    <h3>JWT Authentication Bypass</h3>
+    <p>A detailed walkthrough of solving the JWT authentication bypass vulnerability in the "Quantum Break" challenge.</p>
+    <div class="ctf-footer">
+      <span class="ctf-difficulty">Medium</span>
+      <a href="writeups/HTB2025/jwt-authentication-bypass/index.html" class="ctf-link">Read Writeup <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+            
+              <div class="ctf-card" data-category="binary">
+    <div class="ctf-header">
+      <span class="ctf-badge binary">Binary Exploitation</span>
+      <span class="ctf-date">PicoCTF 2025</span>
+    </div>
+    <h3>Stack Canary Bypass</h3>
+    <p>Step-by-step solution for the "Stack Canary" challenge using GDB debugger and Python scripting.</p>
+    <div class="ctf-footer">
+      <span class="ctf-difficulty">Hard</span>
+      <a href="writeups/PicoCTF2025/stack-canary-bypass/index.html" class="ctf-link">Read Writeup <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+            
+            <div class="ctf-card" data-category="crypto">
+    <div class="ctf-header">
+      <span class="ctf-badge crypto">Cryptography</span>
+      <span class="ctf-date">DEF CON Qualifier 2025</span>
+    </div>
+    <h3>RSA Key Recovery</h3>
+    <p>Analysis and exploitation of weak RSA implementation in the qualification round.</p>
+    <div class="ctf-footer">
+      <span class="ctf-difficulty">Medium</span>
+      <a href="writeups/DEFCON2025/rsa-key-recovery/index.html" class="ctf-link">Read Writeup <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+            
+             <div class="ctf-card" data-category="forensics">
+    <div class="ctf-header">
+      <span class="ctf-badge forensics">Digital Forensics</span>
+      <span class="ctf-date">CSAW CTF 2024</span>
+    </div>
+    <h3>Network Packet Analysis</h3>
+    <p>Forensic investigation of encrypted communication channels in "Wiretap" challenge.</p>
+    <div class="ctf-footer">
+      <span class="ctf-difficulty">Easy</span>
+      <a href="writeups/CSAW2024/network-packet-analysis/index.html" class="ctf-link">Read Writeup <i class="fas fa-arrow-right"></i></a>
+    </div>
+  </div>
+</div>
+        
+        <!-- Team Tab -->
+        <div class="ctf-tab-content" id="team-content">
+          <div class="team-container">
+            <div class="team-info">
+              <div class="team-logo">
+                <img src="img/team-logo.png" alt="ByteBreachers Team Logo">
+              </div>
+              <div class="team-details">
+                <h3>ByteBreachers</h3>
+                <p>A competitive CTF team focused on web exploitation and binary challenges. Founded in 2023, we've participated in over 30 CTF competitions globally.</p>
+                <div class="team-stats">
+                  <div class="team-stat">
+                    <span class="team-stat-value">30+</span>
+                    <span class="team-stat-label">CTFs</span>
+                  </div>
+                  <div class="team-stat">
+                    <span class="team-stat-value">Top 50</span>
+                    <span class="team-stat-label">Global Rank</span>
+                  </div>
+                  <div class="team-stat">
+                    <span class="team-stat-value">5</span>
+                    <span class="team-stat-label">Members</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="team-members">
+              <div class="team-member">
+                <div class="member-avatar">
+                  <img src="img/avatar-you.jpg" alt="Your Avatar">
+                </div>
+                <div class="member-info">
+                  <h4>Razvan Radutoiu</h4>
+                  <p class="member-role">Web Exploitation & Network Security</p>
+                </div>
+              </div>
+              <!-- Add more team members as needed -->
+              <div class="team-member">
+                <div class="member-avatar">
+                  <img src="img/avatar-member1.jpg" alt="Team Member">
+                </div>
+                <div class="member-info">
+                  <h4>Alex Popescu</h4>
+                  <p class="member-role">Binary Exploitation</p>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="member-avatar">
+                  <img src="img/avatar-member2.jpg" alt="Team Member">
+                </div>
+                <div class="member-info">
+                  <h4>Maria Ionescu</h4>
+                  <p class="member-role">Cryptography</p>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="member-avatar">
+                  <img src="img/avatar-member3.jpg" alt="Team Member">
+                </div>
+                <div class="member-info">
+                  <h4>Victor Dragomir</h4>
+                  <p class="member-role">Reverse Engineering</p>
+                </div>
+              </div>
+              <div class="team-member">
+                <div class="member-avatar">
+                  <img src="img/avatar-member4.jpg" alt="Team Member">
+                </div>
+                <div class="member-info">
+                  <h4>Elena Stanciu</h4>
+                  <p class="member-role">Digital Forensics</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <footer aline="center">
-
-  </footer>
   <script src="js/winbox.bundle.js"></script>
   <script src="js/main.js"></script>
 </body>

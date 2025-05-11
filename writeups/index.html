@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/writeup.css" />
+  <link rel="stylesheet" href="../css/writeups-index.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>CTF Writeups | terminal@radutoiu_razvan</title>
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+      <input type="checkbox" id="checkbox" />
+      <div class="slider round"></div>
+    </label>
+    <em>Light / Dark</em>
+  </div>
+
+  <header class="writeups-header">
+    <div class="header-container">
+      <a href="../index.html" class="back-link"><i class="fas fa-chevron-left"></i> Back to Portfolio</a>
+      <h1>CTF Writeups</h1>
+      <p class="header-description">A collection of my CTF challenge solutions and technical writeups.</p>
+    </div>
+  </header>
+
+  <main class="writeups-container">
+    <aside class="writeups-sidebar">
+      <div class="filter-container">
+        <h3>Filters</h3>
+        
+        <div class="filter-group">
+          <h4>Categories</h4>
+          <div class="filter-options">
+            <label class="filter-option">
+              <input type="checkbox" checked class="category-filter" value="all">
+              <span class="checkmark"></span>
+              All Categories
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="category-filter" value="web">
+              <span class="checkmark"></span>
+              Web Exploitation
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="category-filter" value="crypto">
+              <span class="checkmark"></span>
+              Cryptography
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="category-filter" value="binary">
+              <span class="checkmark"></span>
+              Binary Exploitation
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="category-filter" value="forensics">
+              <span class="checkmark"></span>
+              Digital Forensics
+            </label>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h4>Difficulty</h4>
+          <div class="filter-options">
+            <label class="filter-option">
+              <input type="checkbox" checked class="difficulty-filter" value="all">
+              <span class="checkmark"></span>
+              All Difficulties
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="difficulty-filter" value="easy">
+              <span class="checkmark"></span>
+              Easy
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="difficulty-filter" value="medium">
+              <span class="checkmark"></span>
+              Medium
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="difficulty-filter" value="hard">
+              <span class="checkmark"></span>
+              Hard
+            </label>
+          </div>
+        </div>
+        
+        <div class="filter-group">
+          <h4>Competition</h4>
+          <div class="filter-options">
+            <label class="filter-option">
+              <input type="checkbox" checked class="competition-filter" value="all">
+              <span class="checkmark"></span>
+              All Competitions
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="competition-filter" value="hackthebox">
+              <span class="checkmark"></span>
+              HackTheBox
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="competition-filter" value="picoctf">
+              <span class="checkmark"></span>
+              PicoCTF
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="competition-filter" value="defcon">
+              <span class="checkmark"></span>
+              DEF CON
+            </label>
+            <label class="filter-option">
+              <input type="checkbox" class="competition-filter" value="csaw">
+              <span class="checkmark"></span>
+              CSAW
+            </label>
+          </div>
+        </div>
+        
+        <button class="reset-filters-btn">Reset Filters</button>
+      </div>
+      
+      <div class="stats-container">
+        <h3>Stats</h3>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-value">12</span>
+            <span class="stat-label">Writeups</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">4</span>
+            <span class="stat-label">Categories</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">8</span>
+            <span class="stat-label">CTFs</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-value">5.7k</span>
+            <span class="stat-label">Views</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="writeups-content">
+      <div class="search-sort-container">
+        <div class="search-box">
+          <input type="text" placeholder="Search writeups..." id="writeup-search">
+          <i class="fas fa-search"></i>
+        </div>
+        
+        <div class="sort-options">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="difficulty-asc">Difficulty (Easy to Hard)</option>
+            <option value="difficulty-desc">Difficulty (Hard to Easy)</option>
+          </select>
+        </div>
+      </div>
+      
+      <div class="writeups-grid">
+        <div class="writeup-card" 
+     data-category="web" 
+     data-difficulty="medium" 
+     data-competition="uvtctf" 
+     data-date="2025-04-12">
+  <div class="writeup-card-header">
+    <span class="writeup-category web">Web Exploitation</span>
+    <span class="writeup-competition">UVTCTF 2025</span>
+  </div>
+  <h3>error=-330</h3>
+  <p>Exploiting multiple SQL injection vulnerabilities to extract a flag split across different parts of the application.</p>
+  <div class="writeup-card-footer">
+    <span class="writeup-difficulty medium">Medium</span>
+    <a href="UVTCTF2025/error-330/index.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+
+<div class="writeup-card" 
+     data-category="crypto" 
+     data-difficulty="hard" 
+     data-competition="defcon" 
+     data-date="2025-01-20">
+  <div class="writeup-card-header">
+    <span class="writeup-category crypto">Cryptography</span>
+    <span class="writeup-competition">DEF CON Qualifier 2025</span>
+  </div>
+  <h3>RSA Key Recovery</h3>
+  <p>Exploiting a weak RSA implementation to recover the private key and decrypt the flag.</p>
+  <div class="writeup-card-footer">
+    <span class="writeup-difficulty hard">Hard</span>
+    <a href="DEFCON2025/rsa-key-recovery/index.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+  </div>
+</div>
+        
+        <!-- Binary Exploitation Writeup Card -->
+        <div class="writeup-card" 
+             data-category="binary" 
+             data-difficulty="hard" 
+             data-competition="picoctf" 
+             data-date="2025-02-10">
+          <div class="writeup-card-header">
+            <span class="writeup-category binary">Binary Exploitation</span>
+            <span class="writeup-competition">PicoCTF 2025</span>
+          </div>
+          <h3>Stack Canary Bypass</h3>
+          <p>Bypassing stack canary protection to exploit a buffer overflow vulnerability.</p>
+          <div class="writeup-card-footer">
+            <span class="writeup-difficulty hard">Hard</span>
+            <a href="writeup-binary.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <!-- Digital Forensics Writeup Card -->
+        <div class="writeup-card" 
+             data-category="forensics" 
+             data-difficulty="easy" 
+             data-competition="csaw" 
+             data-date="2024-12-05">
+          <div class="writeup-card-header">
+            <span class="writeup-category forensics">Digital Forensics</span>
+            <span class="writeup-competition">CSAW CTF 2024</span>
+          </div>
+          <h3>Network Packet Analysis</h3>
+          <p>Analyzing encrypted network traffic to extract hidden data in the Wiretap challenge.</p>
+          <div class="writeup-card-footer">
+            <span class="writeup-difficulty easy">Easy</span>
+            <a href="writeup-forensics.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <!-- Add more writeup cards here -->
+        <div class="writeup-card" 
+             data-category="web" 
+             data-difficulty="easy" 
+             data-competition="picoctf" 
+             data-date="2025-02-12">
+          <div class="writeup-card-header">
+            <span class="writeup-category web">Web Exploitation</span>
+            <span class="writeup-competition">PicoCTF 2025</span>
+          </div>
+          <h3>Cookie Manipulation</h3>
+          <p>Exploiting insecure cookie handling to gain admin privileges.</p>
+          <div class="writeup-card-footer">
+            <span class="writeup-difficulty easy">Easy</span>
+            <a href="writeup-web.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="writeup-card" 
+             data-category="crypto" 
+             data-difficulty="medium" 
+             data-competition="hackthebox" 
+             data-date="2025-03-10">
+          <div class="writeup-card-header">
+            <span class="writeup-category crypto">Cryptography</span>
+            <span class="writeup-competition">HackTheBox CA 2025</span>
+          </div>
+          <h3>AES-CBC Padding Oracle</h3>
+          <p>Exploiting a padding oracle vulnerability in AES-CBC mode to decrypt the flag.</p>
+          <div class="writeup-card-footer">
+            <span class="writeup-difficulty medium">Medium</span>
+            <a href="writeup-crypto.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="writeup-card" 
+             data-category="binary" 
+             data-difficulty="medium" 
+             data-competition="csaw" 
+             data-date="2024-12-10">
+          <div class="writeup-card-header">
+            <span class="writeup-category binary">Binary Exploitation</span>
+            <span class="writeup-competition">CSAW CTF 2024</span>
+          </div>
+          <h3>Return-Oriented Programming</h3>
+          <p>Leveraging ROP chains to bypass non-executable stack protections.</p>
+          <div class="writeup-card-footer">
+            <span class="writeup-difficulty medium">Medium</span>
+            <a href="writeup-binary.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        
+        <div class="writeup-card" 
+             data-category="forensics" 
+             data-difficulty="hard" 
+             data-competition="defcon" 
+             data-date="2025-01-15">
+          <div class="writeup-card-header">
+            <span class="writeup-category forensics">Digital Forensics</span>
+            <span class="writeup-competition">DEF CON Qualifier 2025</span>
+          </div>
+          <h3>Memory Dump Analysis</h3>
+          <p>Extracting encryption keys from a memory dump to decrypt sensitive files.</p>
+          <div class="writeup-card-footer">
+            <span class="writeup-difficulty hard">Hard</span>
+            <a href="writeup-forensics.html" class="read-writeup-btn">Read Writeup <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="no-writeups-message hidden">
+        <i class="fas fa-search"></i>
+        <p>No writeups match your current filters.</p>
+        <button class="reset-filters-btn">Reset Filters</button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="writeups-footer">
+    <div class="footer-content">
+      <p>&copy; 2025 Razvan Radutoiu. All rights reserved.</p>
+      <p>Built with <i class="fas fa-terminal"></i> and <i class="fas fa-heart"></i></p>
+    </div>
+  </footer>
+
+  <script src="../js/writeups-index.js"></script>
+</body>
+
+</html>
