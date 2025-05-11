@@ -226,59 +226,67 @@ function updateWriteupStats() {
 document.addEventListener('DOMContentLoaded', updateWriteupStats);
 
 
-// Add to writeups-index.js - for implementing dynamic view counting
-
 // Function to update the total views statistic
 async function updateTotalViews() {
   try {
-    // Create a unique namespace for your site
-    const namespace = 'radutoiu-ctf-writeups';
+    // Create a namespace for your site (e.g., your GitHub username)
+    const namespace = 'razvan-radutoiu';
+    const name = 'ctf-writeups-total';
     
-    // Fetch the total view count from CountAPI
-    const response = await fetch(`https://api.countapi.xyz/get/${namespace}/total-views`);
+    // Fetch the current view count
+    const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${name}`);
     const data = await response.json();
-    
-    // If the key doesn't exist yet, create it
-    if (data.value === undefined) {
-      await fetch(`https://api.countapi.xyz/create?namespace=${namespace}&key=total-views&value=0`);
-      return 0;
-    }
     
     // Update the views count in the stats
     const viewsElement = document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-value');
     if (viewsElement) {
-      viewsElement.textContent = data.value.toLocaleString();
+      viewsElement.textContent = data.Count.toLocaleString();
     }
     
-    return data.value;
+    return data.Count;
   } catch (error) {
-    console.error('Error updating view count:', error);
-    return 0;
+    console.error('Error fetching view count:', error);
+    // If the counter doesn't exist yet, create it with an initial value
+    try {
+      const namespace = 'razvan-radutoiu';
+      const name = 'ctf-writeups-total';
+      
+      // Set initial count to 0
+      await fetch(`https://api.counterapi.dev/v1/${namespace}/${name}/set?count=0`);
+      
+      return 0;
+    } catch (setError) {
+      console.error('Error setting initial view count:', setError);
+      return 0;
+    }
   }
 }
 
 // Increment total views counter when the page loads
 async function incrementTotalViews() {
   try {
-    const namespace = 'radutoiu-ctf-writeups';
+    const namespace = 'razvan-radutoiu';
+    const name = 'ctf-writeups-total';
     
     // Increment the counter by 1
-    const response = await fetch(`https://api.countapi.xyz/hit/${namespace}/total-views`);
+    const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${name}/up`);
     const data = await response.json();
     
     // Update the views display
     const viewsElement = document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-value');
     if (viewsElement) {
-      viewsElement.textContent = data.value.toLocaleString();
+      viewsElement.textContent = data.Count.toLocaleString();
     }
   } catch (error) {
     console.error('Error incrementing view count:', error);
+    // If we couldn't increment, try to at least display the current count
+    updateTotalViews();
   }
 }
 
-// Call these functions on page load
+// Add to your existing DOMContentLoaded event
 document.addEventListener('DOMContentLoaded', async function() {
-  // Update existing stats first
+  // Your existing stats calculation code
   updateWriteupStats();
   
   // Then handle the view counting
