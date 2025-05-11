@@ -229,58 +229,63 @@ document.addEventListener('DOMContentLoaded', updateWriteupStats);
 // Function to update the total views statistic
 async function updateTotalViews() {
   try {
-    // Create a namespace for your site (e.g., your GitHub username)
-    const namespace = 'razvan-radutoiu';
-    const name = 'ctf-writeups-total';
+    // Create a namespace based on your site domain (recommended by Abacus)
+    const namespace = 'razvan-radutoiu.github.io';
+    const key = 'ctf-writeups-total';
     
-    // Fetch the current view count
-    const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${name}`);
+    // Get the current view count
+    const response = await fetch(`https://abacus.jasoncameron.dev/get/${namespace}/${key}`);
+    
+    if (!response.ok) {
+      // If the counter doesn't exist yet, increment it to create it
+      const createResponse = await fetch(`https://abacus.jasoncameron.dev/hit/${namespace}/${key}`);
+      const data = await createResponse.json();
+      
+      // Update the views display
+      const viewsElement = document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-value');
+      if (viewsElement) {
+        viewsElement.textContent = data.value.toLocaleString();
+      }
+      
+      return data.value;
+    }
+    
     const data = await response.json();
     
     // Update the views count in the stats
     const viewsElement = document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-value');
     if (viewsElement) {
-      viewsElement.textContent = data.Count.toLocaleString();
+      viewsElement.textContent = data.value.toLocaleString();
     }
     
-    return data.Count;
+    return data.value;
   } catch (error) {
-    console.error('Error fetching view count:', error);
-    // If the counter doesn't exist yet, create it with an initial value
-    try {
-      const namespace = 'razvan-radutoiu';
-      const name = 'ctf-writeups-total';
-      
-      // Set initial count to 0
-      await fetch(`https://api.counterapi.dev/v1/${namespace}/${name}/set?count=0`);
-      
-      return 0;
-    } catch (setError) {
-      console.error('Error setting initial view count:', setError);
-      return 0;
-    }
+    console.error('Error updating view count:', error);
+    return 0;
   }
 }
 
 // Increment total views counter when the page loads
 async function incrementTotalViews() {
   try {
-    const namespace = 'razvan-radutoiu';
-    const name = 'ctf-writeups-total';
+    const namespace = 'razvan-radutoiu.github.io';
+    const key = 'ctf-writeups-total';
     
     // Increment the counter by 1
-    const response = await fetch(`https://api.counterapi.dev/v1/${namespace}/${name}/up`);
+    const response = await fetch(`https://abacus.jasoncameron.dev/hit/${namespace}/${key}`);
     const data = await response.json();
     
     // Update the views display
     const viewsElement = document.querySelector('.stats-grid .stat-item:nth-child(4) .stat-value');
     if (viewsElement) {
-      viewsElement.textContent = data.Count.toLocaleString();
+      viewsElement.textContent = data.value.toLocaleString();
     }
+    
+    return data.value;
   } catch (error) {
     console.error('Error incrementing view count:', error);
     // If we couldn't increment, try to at least display the current count
-    updateTotalViews();
+    return updateTotalViews();
   }
 }
 
