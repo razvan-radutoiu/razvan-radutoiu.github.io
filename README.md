@@ -1,10 +1,7 @@
 #  Personal Portfolio
 
-Welcome to my personal portfolio repository! This project showcases my skills, projects, and provides a glimpse into my background.
+Welcome to my personal portfolio repository!
 
-## Technologies Used
-- **HTML, CSS, JavaScript:**
-- **WinBox.js:** 
-  
+# [razvan-radutoiu.github.io](https://razvan-radutoiu.github.io)
 
-*Icons sourced from Icons8.*
+
