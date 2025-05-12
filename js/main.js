@@ -175,7 +175,7 @@ ctf.addEventListener('click', () => {
 });
 
 // Typing Effect
-const texts = ['whoami', 'ls -la', 'cd projects/', 'python3 hack.py', 'sudo apt update'];
+const texts = ['whoami', 'ls -la', 'cd projects/', 'python3 app.py', 'sudo apt update'];
 let count = 0;
 let index = 0;
 let currentText = '';
