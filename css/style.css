@@ -1210,34 +1210,46 @@ nav ul li:hover {
   will-change: transform, width, height;
 }
 
-/* WIP Badge */
 .wip-badge {
   position: fixed;
   top: 20px;
   left: 20px;
-  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-  color: white;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: bold;
+  background: rgba(100, 100, 100, 0.8);
+  color: rgba(200, 200, 200, 0.9);
+  padding: 6px 12px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  letter-spacing: 0.5px;
   z-index: 1000;
-  animation: wipPulse 2s ease-in-out infinite alternate;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(150, 150, 150, 0.3);
+  backdrop-filter: blur(10px);
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-@keyframes wipPulse {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-  }
-  100% {
-    transform: scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
-  }
+.wip-badge::before {
+  content: "🚧";
+  font-size: 12px;
+  filter: grayscale(0.6) opacity(0.8);
+}
+
+.wip-badge:hover {
+  opacity: 0.7;
+}
+
+.wip-badge:hover::before {
+  filter: grayscale(0.3) opacity(1);
+}
+
+/* Dark theme compatibility */
+.dark .wip-badge {
+  background: rgba(60, 60, 60, 0.7);
+  color: rgba(160, 160, 160, 0.8);
+  border: 1px solid rgba(120, 120, 120, 0.2);
 }
 
 /* Responsive adjustments */
@@ -1245,7 +1257,12 @@ nav ul li:hover {
   .wip-badge {
     top: 15px;
     left: 15px;
-    font-size: 11px;
-    padding: 6px 12px;
+    font-size: 9px;
+    padding: 4px 10px;
+    gap: 4px;
+  }
+  
+  .wip-badge::before {
+    font-size: 10px;
   }
 }
