@@ -1206,7 +1206,46 @@ nav ul li:hover {
   }
 }
 
-/* Add this to your style.css */
 .winbox {
   will-change: transform, width, height;
+}
+
+/* WIP Badge */
+.wip-badge {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  z-index: 1000;
+  animation: wipPulse 2s ease-in-out infinite alternate;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+@keyframes wipPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+  }
+  100% {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 107, 107, 0.5);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .wip-badge {
+    top: 15px;
+    left: 15px;
+    font-size: 11px;
+    padding: 6px 12px;
+  }
 }
